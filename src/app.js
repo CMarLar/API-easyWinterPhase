@@ -1,9 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-// const aditionalRouters = require("./routers/aditional.routers");
 
-
-const UserRouters = require("./routers/user.router");
+const UserRouters = require("./routers/user.routers");
 
 const errorHandling = require("./error/errorHandling");
 

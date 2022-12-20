@@ -4,18 +4,7 @@ const userCtrl = require("../controller/user.controller");
 
 
 
-router.post('/register', userCtrl.postUser);
-
-
-
-
-// router.post('/login', userCtrl.login);
-
-// router.get('/libros',userCtrl.getBooks);
-// router.get('/libro',userCtrl.getOneBook);//cambio de endpoint de libros a libro O NO FUNCIONA
-// router.post('/libros',userCtrl.addNewBook);
-// router.put('/libros',userCtrl.modifyBooks);
-// router.delete('/libros',userCtrl.deleteBook);
+router.post('/register', userCtrl.postRegister); //ruta de registro
 
 
 module.exports = router;
