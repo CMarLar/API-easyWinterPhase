@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-// const aditionalRouters = require("./routers/aditional.routers");
+const errorHandling = require("./error/errorHandling")
+
+const userRouters = require("./routers/user.routers");
+const textRouters = require("./routers/text.routers");
 
 
-const UserRouters = require("./routers/user.router");
-
-const errorHandling = require("./error/errorHandling");
 
 const app = express();
 
@@ -15,7 +15,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended : false}));
 app.use(express.json());
 
-app.use(UserRouters);
+app.use(userRouters);
+app.use(textRouters);
 
 app.use(function (req,res,next){
     res.status(404).json({error : true, code : 404, message : "Endpoint doesnt found"});
