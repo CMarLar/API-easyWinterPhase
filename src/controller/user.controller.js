@@ -75,25 +75,25 @@ function postUser(request,response){
 
 // //GET “/libros?id_usuario=Pepe&id_libro=10”. Devuelve los datos del libro cuyo id corresponda con el de la BBDD y sea del usuario especificado por su id_usuario.
 
-// function getOneBook(request,response){
-//     let user_id = request.query.id_usuario;
-//     let book_id = request.query.id_libro;
-//     console.log("Usuario: " + user_id + ", Libro: " + book_id);
-//     let sql= "SELECT usuario.id_usuario,libro.id_libro,libro.titulo,libro.tipo,libro.autor,libro.precio,libro.foto FROM appbooks.usuario JOIN libro ON (usuario.id_usuario = libro.id_usuario) WHERE usuario.id_usuario = '" + user_id + "' AND libro.id_libro = '" + book_id + "'"
+function getOneBook(request,response){
+    let user_id = request.query.id_usuario;
+    let book_id = request.query.id_libro;
+    console.log("Usuario: " + user_id + ", Libro: " + book_id);
+    let sql= "SELECT usuario.id_usuario,libro.id_libro,libro.titulo,libro.tipo,libro.autor,libro.precio,libro.foto FROM appbooks.usuario JOIN libro ON (usuario.id_usuario = libro.id_usuario) WHERE usuario.id_usuario = '" + user_id + "' AND libro.id_libro = '" + book_id + "'"
 
-//         connection.query(sql, (err,result) =>{
-//         if(err){console.log(err);}
-//         else
-//         {
-//             console.log(result);
+        connection.query(sql, (err,result) =>{
+        if(err){console.log(err);}
+        else
+        {
+            console.log(result);
 
-//             if(result)
-//             response.send(result);
+            if(result)
+            response.send(result);
 
-//             else{response.send("-1")}
-//         }
-//     })
-// }
+            else{response.send("-1")}
+        }
+    })
+}
 // //PUT “/libros”. Actualiza la información de un libro de la BBDD.
 // function modifyBooks(request,response){
 //     console.log(request.body);

@@ -12,3 +12,5 @@ const connection = mysql.createConnection({
 
     port: process.env.DB_PORT           || 5485
 })
+
+module.exports = connection;
