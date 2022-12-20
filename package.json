@@ -1,0 +1,25 @@
+{
+  "name": "api-easywinterphase",
+  "version": "1.0.0",
+  "description": "Api Rest para el proyecto Easy Winter Phase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/apiRest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMarLar/API-EasyWinterPhase.git"
+  },
+  "author": "Carlos Marina, Irene Herrero, Miguel Generoso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CMarLar/API-EasyWinterPhase/issues"
+  },
+  "homepage": "https://github.com/CMarLar/API-EasyWinterPhase#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3"
+  }
+}
