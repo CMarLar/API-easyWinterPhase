@@ -1,5 +1,7 @@
 const mysql = require("mysql2");
 
+/* const cors = require("cors") */
+
 const connection = mysql.createConnection({
     
     host: process.env.DB_HOST           ||  "containers-us-west-177.railway.app",
@@ -13,4 +15,7 @@ const connection = mysql.createConnection({
     port: process.env.DB_PORT           ||  5485
 })
 
-module.exports = connection;
+
+
+module.exports = connection
+
