@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 
+
 const UserRouters = require("./routers/user.routers");
+const campaignRouters = require("./routers/campaign.routers")
 
 const errorHandling = require("./error/errorHandling");
 
@@ -14,6 +16,7 @@ app.use(express.urlencoded({ extended : false}));
 app.use(express.json());
 
 app.use(UserRouters);
+app.use(campaignRouters);
 
 app.use(function (req,res,next){
     res.status(404).json({error : true, code : 404, message : "Endpoint doesnt found"});
