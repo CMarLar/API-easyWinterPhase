@@ -10,28 +10,21 @@ function postRegister(request,response){
     console.log(request.body);
     console.log();
 
-    if(request.body.password == request.body.confirmPassword){
+    let newUsuario = new User(request.body.password,request.body.email,request.body.avatar,request.body.username);
+    let sql = "INSERT INTO user (password,email,avatar,username) VALUES (?,?,?,?)";
+    console.log("DATOS: " + JSON.stringify(newUsuario));
+    let params = [newUsuario.password,newUsuario.email,newUsuario.avatar,newUsuario.username];
+    
 
-        let newUsuario = new User(request.body.password,request.body.email,request.body.avatar,request.body.username);
-        let sql = "INSERT INTO user (password,email,avatar,username) VALUES (?,?,?,?)";
-        console.log("DATOS: " + JSON.stringify(newUsuario));
-        let params = [newUsuario.password,newUsuario.email,newUsuario.avatar,newUsuario.username];
-        
-
-        connection.query(sql,params, function(error,result){
-            if(error){
-                console.log(error);
-                response.send(result);
-            }else{
-                console.log(result);
-                response.send(result);
-            }
-        })
-    }else{
-
-        console.log("ERROR");
-
-    }
+    connection.query(sql,params, function(error,result){
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
 
 
     
