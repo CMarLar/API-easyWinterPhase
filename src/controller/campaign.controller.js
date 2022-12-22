@@ -1,4 +1,4 @@
-const { response, request } = require("express");//Importa dos métodos de express. Esto se hace para informar las funciones del archivo.
+// const { response, request } = require("express");//Importa dos métodos de express. Esto se hace para informar las funciones del archivo.
 const connection = require("../database")//importa la conexión con la base de datos
 
 
