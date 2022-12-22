@@ -48,32 +48,65 @@ let campaign_Id = request.body.campaign_id;
 
 
 
-// //POST -> /campaign crea campaña
-// function postCampaign(request,response){
-//     console.log(request.body);
-//     let sql = "INSERT INTO user (nombre,apellidos,correo,foto,password)" +
-//                 "VALUES ('"+request.body.nombre +"', '"+
-//                             request.body.apellidos + "', '"+
-//                             request.body.correo + "', '"+
-//                             request.body.url + "', '"+
-//                             request.body.password + "')";
-//     console.log(sql);
+//POST -> /campaign crea campaña
+function postCampaign(request,response){
+    console.log(request.body);
+    let sql = "INSERT INTO campaign (campaign_name,user_id)" +
+                "VALUES ('"+request.body.campaign_name +"', '"+
+                            request.body.user_id + "')";
+    console.log(sql);
 
-//     connection.query(sql, (err,result) =>{
-//         if(err){console.log(err);}//si hay error, imprímelo
-//         else//de lo contrario
-//         {
-//             console.log(result);//imprime el resultado
+    connection.query(sql, (err,result) =>{
+        if(err){console.log(err);}
+        else
+        {
+            console.log(result);
 
-//             if(result)//resultID hace referencia a un objeto de POST. Aquí dice Si hay ID, manda la respuesta?
-//             response.send(result);
-//             // {response.send(String(result.insertId))}
-//             else{response.send("-1")}
-//         }
-//     })
-// }
+            if(result)
+            response.send(result);
+            
+            else{response.send("-1")}
+        }
+    })
+}
+
+//PUT -> /campaign modifica campaña
+function putCampaign(request,response){
+
+    console.log(request.body);
+
+    if(request.body.campaign_name == ""){
+        request.body.campaign_name = null;
+    }
+    if(request.body.user_id == ""){
+        request.body.user_id = null;
+    }
+    if(request.body.campaign_id != null){
+        
+        let params = [request.body.campaign_name,request.body.user_id,request.body.campaign_id];
+
+        let sql = "UPDATE campaign SET campaign_name = COALESCE(?,campaign_name), user_id = COALESCE(?,user_id) WHERE campaign_id = ?";
+
+
+        connection.query(sql,params, function(error,result){
+            if(error){
+                console.log(error);
+                response.send(error);
+            }else{
+                console.log(result);
+                response.send(result);
+            }
+        })
+
+    }else{
+
+        console.log("No se reconoce el id de campaña");
+    }
+
+    
+}
 
 
 
 
-module.exports = {getCampaigns,deleteCampaign}
+module.exports = {getCampaigns,deleteCampaign,postCampaign,putCampaign}
