@@ -11,10 +11,10 @@ const connection = require("../database")
     else
          sql = "SELECT * FROM text WHERE text_id="  + request.query.id ;
 
-     connection.query(sql, function (err, result) 
+     connection.query(sql, function (error, result) 
     {
-        if (err) 
-           console.log(err);
+        if (error) 
+           console.log(error);
          else 
        {
             response.send(result);

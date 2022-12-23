@@ -31,7 +31,24 @@ function postPlayer(request,response){
     })
 
 }
+function getPlayers(request, response) // funciona 
+{
+   let sql;
+    if (request.query.id == null)
+        sql = "SELECT * FROM players";
+   else
+        sql = "SELECT * FROM players WHERE player_id="  + request.query.id ;
 
+    connection.query(sql, function (err, result) 
+   {
+       if (err) 
+          console.log(err);
+        else 
+      {
+           response.send(result);
+       }
+    })
+}
 
 
 /*
@@ -61,5 +78,5 @@ function insertTablaTeachers(){
 */
 
 
-module.exports = {postPlayer}
+module.exports = {postPlayer, getPlayers}
 
