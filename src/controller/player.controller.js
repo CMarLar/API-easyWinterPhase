@@ -4,21 +4,76 @@ const {Player} = require("../models/player.model");
 
 function postPlayer(request,response){
 
-    console.log(request.body);
-    console.log(request.body.players[0]);
+    console.log("BODY COMPLETO " + JSON.stringify(request.body));
+    console.log("BODY[0] " +JSON.stringify(request.body[0]));
+    console.log("BODY[0] " +JSON.stringify(request.body[1]));
 
-    let newPlayer = new Player (null,request.body.campaign_id,request.body.player_name,null);
+    let sql = "INSERT INTO players (house_id,campaign_id,player_name,winterPhaseDone) VALUES ?;"//esto se hace para inserciones múltiples
+    let values;
+    if(request.body.length == 1){
 
-    let sql = "INSERT INTO players (house_id,campaign_id, player_name,winterPhaseDone) VALUES ?;"//esto se hace para inserciones múltiples
+        values =[
+            [request.body[0].house_id,request.body[0].campaign_id,request.body[0].player_name,request.body[0].winterPhaseDone]
+            
+        ]
 
-    let values =[
-        [request.body.players[0].house_id,request.body.players[0].campaign_id,request.body.players[0].player_name,request.body.players[0].winterPhaseDone,],
-        [request.body.players[1].house_id,request.body.players[1].campaign_id,request.body.players[1].player_name,request.body.players[1].winterPhaseDone,],
-        [request.body.players[2].house_id,request.body.players[2].campaign_id,request.body.players[2].player_name,request.body.players[2].winterPhaseDone,],
-    ]
+    }else if(request.body.length == 2){
 
-    let params = [newPlayer.campaign_id,newPlayer.player_name]
-    console.log("DATOS: " + JSON.stringify(newPlayer));
+        values =[
+
+            [request.body[0].house_id,request.body[0].campaign_id,request.body[0].player_name,request.body[0].winterPhaseDone],
+            [request.body[1].house_id,request.body[1].campaign_id,request.body[1].player_name,request.body[1].winterPhaseDone]
+                    
+        ]
+
+    }else if(request.body.length == 3){
+
+        values =[
+
+            [request.body[0].house_id,request.body[0].campaign_id,request.body[0].player_name,request.body[0].winterPhaseDone],
+            [request.body[1].house_id,request.body[1].campaign_id,request.body[1].player_name,request.body[1].winterPhaseDone],
+            [request.body[2].house_id,request.body[2].campaign_id,request.body[2].player_name,request.body[2].winterPhaseDone]
+                    
+        ]
+
+    }else if(request.body.length == 4){
+
+        values =[
+
+            [request.body[0].house_id,request.body[0].campaign_id,request.body[0].player_name,request.body[0].winterPhaseDone],
+            [request.body[1].house_id,request.body[1].campaign_id,request.body[1].player_name,request.body[1].winterPhaseDone],
+            [request.body[2].house_id,request.body[2].campaign_id,request.body[2].player_name,request.body[2].winterPhaseDone],
+            [request.body[3].house_id,request.body[3].campaign_id,request.body[3].player_name,request.body[3].winterPhaseDone]
+                    
+        ]
+
+    }else if(request.body.length == 5){
+
+        values =[
+
+            [request.body[0].house_id,request.body[0].campaign_id,request.body[0].player_name,request.body[0].winterPhaseDone],
+            [request.body[1].house_id,request.body[1].campaign_id,request.body[1].player_name,request.body[1].winterPhaseDone],
+            [request.body[2].house_id,request.body[2].campaign_id,request.body[2].player_name,request.body[2].winterPhaseDone],
+            [request.body[3].house_id,request.body[3].campaign_id,request.body[3].player_name,request.body[3].winterPhaseDone],
+            [request.body[4].house_id,request.body[4].campaign_id,request.body[4].player_name,request.body[4].winterPhaseDone]
+                    
+        ]
+
+    }else if(request.body.length == 6){
+
+        values =[
+
+            [request.body[0].house_id,request.body[0].campaign_id,request.body[0].player_name,request.body[0].winterPhaseDone],
+            [request.body[1].house_id,request.body[1].campaign_id,request.body[1].player_name,request.body[1].winterPhaseDone],
+            [request.body[2].house_id,request.body[2].campaign_id,request.body[2].player_name,request.body[2].winterPhaseDone],
+            [request.body[3].house_id,request.body[3].campaign_id,request.body[3].player_name,request.body[3].winterPhaseDone],
+            [request.body[4].house_id,request.body[4].campaign_id,request.body[4].player_name,request.body[4].winterPhaseDone],
+            [request.body[5].house_id,request.body[5].campaign_id,request.body[5].player_name,request.body[5].winterPhaseDone]
+                    
+        ]
+
+    }
+    
 
     connection.query(sql,[values], function(error,result){
         if(error){
@@ -50,6 +105,27 @@ function getPlayers(request, response) // funciona
     })
 }
 
+function putPlayer(request,response){
+
+    console.log("CAMBIO JUGADOR" + request.body);
+
+    let sql = "UPDATE players SET house_id = COALESCE(?,house_id) where player_id = ?;"//esto se hace para inserciones múltiples
+
+    let values = [request.body[0].house_id,request.body[0].player_id]
+
+    connection.query(sql,values, function(error,result){
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+
+}
+
+
 
 /*
 function insertTablaTeachers(){
@@ -78,5 +154,5 @@ function insertTablaTeachers(){
 */
 
 
-module.exports = {postPlayer, getPlayers}
+module.exports = {postPlayer, getPlayers,putPlayer}
 
