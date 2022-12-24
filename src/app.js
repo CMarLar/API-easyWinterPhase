@@ -6,8 +6,9 @@ const textRouters = require("./routers/text.routers");
 
 
 const UserRouters = require("./routers/user.routers");
-const campaignRouters = require("./routers/campaign.routers")
-const playerRouters = require("./routers/player.routers")
+const campaignRouters = require("./routers/campaign.routers");
+const playerRouters = require("./routers/player.routers");
+const HouseRouters = require("./routers/house.routers");
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(UserRouters);
 app.use(campaignRouters);
 app.use(playerRouters);
 app.use(textRouters);
+app.use(HouseRouters);
 
 
 app.use(function (req,res,next){
