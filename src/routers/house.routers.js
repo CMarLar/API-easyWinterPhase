@@ -9,3 +9,5 @@ router.delete("/createhouse",houseCtrl.deleteHouse);//eliminar casa
 
 
 module.exports = router;
+
+module.exports = router;
