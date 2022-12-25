@@ -11,8 +11,8 @@ function getCampaigns (request,response){
 
     let sql= "SELECT * FROM railway.campaign WHERE user_id = '" + userId + "'";
     
-    connection.query(sql, (err,result) =>{
-        if(err){console.log(err);}
+    connection.query(sql, (error,result) =>{
+        if(error){console.log(error);}
         else
         {
             console.log(result);
@@ -30,14 +30,14 @@ function deleteCampaign(request,response){
 
 let campaign_Id = request.body.campaign_id;
 
-
     console.log(request.body);//
+
     let sql = "DELETE FROM railway.campaign WHERE campaign_id = '" + campaign_Id + "'";
     console.log(sql); 
-    connection.query(sql, (err, result) =>
+    connection.query(sql, (error, result) =>
     {
-        if (err) 
-            console.log(err);
+        if (error) 
+            console.log(error);
         else 
         {
             console.log(result);
@@ -45,7 +45,6 @@ let campaign_Id = request.body.campaign_id;
         }
     })
 }
-
 
 
 //POST -> /campaign crea campaña
@@ -56,8 +55,8 @@ function postCampaign(request,response){
                             request.body.user_id + "')";
     console.log(sql);
 
-    connection.query(sql, (err,result) =>{
-        if(err){console.log(err);}
+    connection.query(sql, (error,result) =>{
+        if(error){console.log(error);}
         else
         {
             console.log(result);
