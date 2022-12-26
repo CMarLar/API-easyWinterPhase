@@ -6,11 +6,11 @@ function postChar(request,response){
 
     console.log(request.body);
 
-    let newChar = new Character (request.body.house_id,request.body.year,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,0,0,request.body.role,null);
+    let newChar = new Character (request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,0,0,request.body.role,null);
 
-    let params = [request.body.house_id,request.body.year,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,request.body.role]
+    let params = [null,request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,request.body.role]
 
-    let sql = "INSERT INTO character (house_id,year,char_name,age,char_status,isMarried,role)" + "VALUES (?,?,?,?,?,?,?);";
+    let sql = "INSERT INTO railway.character (character_id,house_id,year_id,char_name,age,char_status,isMarried,role)" + "VALUES (?,?,?,?,?,?,?,?);";
 
     console.log("DATOS: " + JSON.stringify(newChar));
 
@@ -31,3 +31,4 @@ function postChar(request,response){
 module.exports = {postChar}    
 
 
+// INSERT INTO `railway`.`character` (`house_id`, `char_name`, `age`, `char_status`, `isMarried`, `marriageGlory`, `courtesyMod`, `role`) VALUES ('74', 'Personaje de prueba', '18', b'1', b'0', '0', '0', 'Escudero');
