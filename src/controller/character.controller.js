@@ -6,11 +6,11 @@ function postChar(request,response){
 
     console.log(request.body);
 
-    let newChar = new Character (request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,0,0,request.body.role,null);
+    let newChar = new Character (request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,0,0,request.body.role,request.body.sex,null);
 
-    let params = [null,request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,request.body.role]
+    let params = [null,request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,request.body.role,request.body.sex]
 
-    let sql = "INSERT INTO railway.character (character_id,house_id,year_id,char_name,age,char_status,isMarried,role)" + "VALUES (?,?,?,?,?,?,?,?);";
+    let sql = "INSERT INTO railway.character (character_id,house_id,year_id,char_name,age,char_status,isMarried,role,sex)" + "VALUES (?,?,?,?,?,?,?,?,?);";
 
     console.log("DATOS: " + JSON.stringify(newChar));
 

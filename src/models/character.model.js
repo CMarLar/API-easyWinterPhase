@@ -1,6 +1,6 @@
 class Character
 {
-    constructor(house_id, year_id, char_name, age, char_status, isMarried, marriageGlory, courtesyMod, role,character_id=null)
+    constructor(house_id, year_id, char_name, age, char_status, isMarried, marriageGlory, courtesyMod, role, sex,character_id=null)
     {
         this.character_id = character_id;
         this.house_id = house_id;
@@ -10,8 +10,9 @@ class Character
         this.char_status = char_status;
         this.isMarried = isMarried;
         this.marriageGlory = marriageGlory;
-        this.courtesyMod = courtesyMod
+        this.courtesyMod = courtesyMod;
         this.role = role;
+        this.sex = sex;
     }
 }
 
