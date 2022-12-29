@@ -35,6 +35,9 @@ function putHouse(request,response){
     if(request.body.house_name == ""){
         request.body.house_name = null;
     }
+    if(request.body.activeChar == ""){
+        request.body.activeChar = null;
+    }
     if(request.body.holding_name == ""){
         request.body.holding_name = null;
     }
@@ -47,9 +50,9 @@ function putHouse(request,response){
     if(request.body.house_id != null){
 
 
-        let params = [request.body.house_name,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.house_id]
+        let params = [request.body.house_name,request.body.activeChar,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.house_id]
 
-        let sql = "UPDATE house SET house_name = COALESCE(?,house_name), holding_name = COALESCE(?,holding_name),familyCharacteristic = COALESCE(?,familyCharacteristic),shield = COALESCE(?,shield) WHERE house_id = ?";
+        let sql = "UPDATE house SET house_name = COALESCE(?,house_name),activeChar = COALESCE(?,activeChar), holding_name = COALESCE(?,holding_name),familyCharacteristic = COALESCE(?,familyCharacteristic),shield = COALESCE(?,shield) WHERE house_id = ?";
 
         connection.query(sql,params, function(error,result){
             if(error){

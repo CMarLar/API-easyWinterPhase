@@ -110,7 +110,7 @@ function putPlayers(request,response){
     console.log("CAMBIO JUGADOR" + request.body);
     console.log("HOLA: " + request.body.house_id);
 
-    let sql = "UPDATE players SET house_id = COALESCE(?,house_id) where player_id = ?;"//esto se hace para inserciones múltiples
+    let sql = "UPDATE players SET house_id = ? where player_id = ?;"//esto se hace para inserciones múltiples
 
     let values = [request.body.house_id,request.body.player_id]
 
