@@ -3,9 +3,10 @@ const router = Router();
 const charCtrl = require("../controller/character.controller");
 
 router.post('/addnpc',charCtrl.postChar);//nuevo personaje
-router.post('/createhouse',charCtrl.postChar)//nuevo personaje principal y escudero
-router.get("/addnpc",charCtrl.getChar)//recoge personajes de una casa
-router.delete("/addnpc",charCtrl.deleteChar)//borra borra un personaje
+router.post('/createhouse',charCtrl.postChar);//nuevo personaje principal y escudero
+router.get("/addnpc",charCtrl.getChar);//recoge personajes de una casa
+router.delete("/addnpc",charCtrl.deleteChar);//borra borra un personaje
+router.put("/addnpc",charCtrl.putChar);//modifica un personaje
 
 
 

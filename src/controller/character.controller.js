@@ -1,7 +1,7 @@
 const connection = require("../database")
 const {Character} = require("../models/character.model");
 
-//POST -> /postChar///HAY QUE MODIFICARLA PARA HACER INSERCIONES MÚLTIPLES///
+//POST -> /Crea un personaje
 function postChar(request,response){
 
     console.log(request.body);
@@ -52,6 +52,75 @@ function getChar(request,response){
 }
 
 
+function putChar(request,response){//al hacer las pruebas en Postman tenía que poner el 1 y el 0 de char_status entre comillas
+
+    console.log(request.body);
+
+    if(request.body.house_id == ""){
+        request.body.house_id = null;
+    }
+    if(request.body.year_id == ""){
+        request.body.year_id = null;
+    }
+    if(request.body.char_name == ""){
+        request.body.char_name = null;
+    }
+    if(request.body.age == ""){
+        request.body.age = null;
+    }
+    if(request.body.char_status == ""){//esta guarrería es cosa de Miguel para que el p**o sql deje de pasar ceros a null
+        request.body.char_status = null;
+    }
+
+    if(request.body.char_status == null){
+        request.body.char_status = 0;
+    }
+
+    if(request.body.isMarried == ""){
+        request.body.isMarried = null;
+    }
+    
+    if(request.body.isMarried == null){//esta guarrería es cosa de Miguel para que el p**o sql deje de pasar ceros a null
+        request.body.isMarried = 0;
+    }
+
+    if(request.body.mariageGlory == ""){
+        request.body.mariageGlory = null;
+    }
+    if(request.body.courtesyMod == ""){
+        request.body.courtesyMod = null;
+    }
+    if(request.body.role == ""){
+        request.body.role = null;
+    }
+    if(request.body.sex == ""){
+        request.body.sex = null;
+    }
+    if(request.body.character_id != null){
+
+
+        let params = [request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,request.body.mariageGlory,request.body.courtesyMod,request.body.role,request.body.sex,request.body.character_id]
+
+        let sql = "UPDATE railway.character SET house_id = COALESCE(?,house_id),year_id = COALESCE(?,year_id), char_name = COALESCE(?,char_name),age = COALESCE(?,age),char_status = COALESCE(?,char_status),isMarried = COALESCE(?,isMarried),marriageGlory = COALESCE(?,marriageGlory),courtesyMod = COALESCE(?,courtesyMod),role = COALESCE(?,role),sex = COALESCE(?,sex) WHERE character_id = ?";
+
+        connection.query(sql,params, function(error,result){
+            if(error){
+                console.log(error);
+                response.send(error);
+            }else{
+                console.log(result);
+                response.send(result);
+            }
+        })
+
+    }else{
+
+        console.log("No se reconoce el id de personaje");
+    }
+
+    
+}
+//DELETE - BORRA UN PERSONAJE
 function deleteChar(request,response){
 
     let character_id = request.body.character_id;
@@ -73,7 +142,7 @@ function deleteChar(request,response){
 
 
 
-module.exports = {postChar,getChar,deleteChar}    
+module.exports = {postChar,getChar,deleteChar,putChar}    
 
 
 // INSERT INTO `railway`.`character` (`house_id`, `char_name`, `age`, `char_status`, `isMarried`, `marriageGlory`, `courtesyMod`, `role`) VALUES ('74', 'Personaje de prueba', '18', b'1', b'0', '0', '0', 'Escudero');
