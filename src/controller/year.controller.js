@@ -5,8 +5,8 @@ function postYear(request,response){
 
     console.log(request.body);
 
-    let sql = "INSERT INTO year (yearNumber,isFirstYear,isLastYear,notes) VALUES (?,?,?,?)";
-    let values = [request.body.yearNumber,request.body.isFirstYear,request.body.isLastYear,request.body.notes];
+    let sql = "INSERT INTO year (yearNumber,isFirstYear,isLastYear,notes,campaign_id) VALUES (?,?,?,?,?)";
+    let values = [request.body.yearNumber,request.body.isFirstYear,request.body.isLastYear,request.body.notes,request.body.campaign_id];
 
     connection.query(sql,values,function(error,result){
 

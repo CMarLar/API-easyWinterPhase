@@ -6,12 +6,12 @@ function postHouse(request,response){
 
     console.log(request.body);
 
-    let newHouse = new House (request.body.house_name,null,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,null);
+    let newHouse = new House (request.body.house_name,null,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.economyLevels,null);
 
 
-    let sql = "INSERT INTO house (house_name,holding_name,familyCharacteristic,shield)" + "VALUES (?,?,?,?);";
+    let sql = "INSERT INTO house (house_name,holding_name,familyCharacteristic,shield,economyLevels)" + "VALUES (?,?,?,?,?);";
 
-    let params = [request.body.house_name,request.body.holding_name,request.body.familyCharacteristic,request.body.shield]
+    let params = [request.body.house_name,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.economyLevels]
 
     console.log("DATOS: " + JSON.stringify(newHouse));
 
@@ -50,9 +50,9 @@ function putHouse(request,response){
     if(request.body.house_id != null){
 
 
-        let params = [request.body.house_name,request.body.activeChar,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.house_id]
+        let params = [request.body.house_name,request.body.activeChar,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.economyLevels,request.body.house_id]
 
-        let sql = "UPDATE house SET house_name = COALESCE(?,house_name),activeChar = COALESCE(?,activeChar), holding_name = COALESCE(?,holding_name),familyCharacteristic = COALESCE(?,familyCharacteristic),shield = COALESCE(?,shield) WHERE house_id = ?";
+        let sql = "UPDATE house SET house_name = COALESCE(?,house_name),activeChar = COALESCE(?,activeChar), holding_name = COALESCE(?,holding_name),familyCharacteristic = COALESCE(?,familyCharacteristic),shield = COALESCE(?,shield), economyLevels = COALESCE(?,economyLevels) WHERE house_id = ?";
 
         connection.query(sql,params, function(error,result){
             if(error){
