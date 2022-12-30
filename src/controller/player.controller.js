@@ -105,7 +105,7 @@ function getPlayers(request, response) // funciona
     })
 }
 
-function putPlayers(request,response){
+function putPlayersHouse(request,response){
 
     console.log("CAMBIO JUGADOR" + request.body);
     console.log("HOLA: " + request.body.house_id);
@@ -113,6 +113,42 @@ function putPlayers(request,response){
     let sql = "UPDATE players SET house_id = ? where player_id = ?;"//esto se hace para inserciones múltiples
 
     let values = [request.body.house_id,request.body.player_id]
+
+    connection.query(sql,values, function(error,result){
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+
+}
+
+function putPlayers(request,response){
+
+    console.log("CAMBIO JUGADOR" + request.body);
+    console.log("HOLA: " + request.body.house_id);
+
+    if (request.body.house_id == "" || request.body.house_id == null){
+        request.body.house_id = null;
+    }
+    if (request.body.house_id == "" || request.body.house_id == null){
+        request.body.house_id = null;
+    }
+    if (request.body.campaign_id == "" || request.body.campaign_id == null){
+        request.body.campaign_id = null;
+    }
+    if (request.body.player_name == "" || request.body.player_name == null){
+        request.body.player_name = null;
+    }
+    if (request.body.winterPhaseDone == "" || request.body.winterPhaseDone == null){
+        request.body.winterPhaseDone = null;
+    }
+    let sql = "UPDATE players SET house_id = COALESCE(?,house_id), campaign_id = COALESCE(?,campaign_id), player_name = COALESCE(?,player_name), winterPhaseDone = COALESCE(',winterPhaseDone) WHERE player_id = ?;"
+
+    let values = [request.body.player_id,request.body.house_id,request.body.campaign_id,request.body.player_name,request.body.winterPhaseDone]
 
     connection.query(sql,values, function(error,result){
         if(error){
@@ -155,5 +191,5 @@ function insertTablaTeachers(){
 */
 
 
-module.exports = {postPlayer, getPlayers,putPlayers}
+module.exports = {postPlayer, getPlayers,putPlayersHouse}
 
