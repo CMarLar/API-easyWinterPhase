@@ -6,6 +6,7 @@ router.post('/addplayers',playerCtrl.postPlayer);//nuevo usuario
 
 router.get("/phases",playerCtrl.getPlayers);//mostrar nombre en las phases de invierno
 
-router.put('/housesmanagement', playerCtrl.putPlayersHouse)
+router.put('/housesmanagement', playerCtrl.putPlayersHouse);
+router.put('/currentcampaignPlayer', playerCtrl.putPlayers);
 
 module.exports = router;
