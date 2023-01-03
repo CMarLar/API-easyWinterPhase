@@ -103,5 +103,43 @@ function postPlayerYear(request,response){
     })
 }
 
+function putYear(request,response){
 
-module.exports = {postYear,postPlayerYear};
+    console.log("###########################################################################");
+    console.log(JSON.stringify(request.body));
+
+    let sql = "UPDATE year SET yearNumber = COALESCE(?,yearNumber),isFirstYear = COALESCE(?,isFirstYear), isLastYear = COALESCE(?,isLastYear),notes = COALESCE(?,notes) WHERE year_id = ?";
+
+    
+
+    if (request.body.yearNumber == null){
+        request.body.yearNumber = null;
+    }
+    if (request.body.isFirstYear == null){
+        request.body.isFirstYear = null;
+    }else if(request.body.isFirstYear == 0){
+        request.body.isFirstYear = 0;
+    }
+    if (request.body.isLastYear == null){
+        request.body.isLastYear = null;
+    }else if(request.body.isLastYear == 0){
+        request.body.isLastYear = 0;
+    }
+    if (request.body.notes == null){
+        request.body.notes = null;
+    }
+    let values = [request.body.yearNumber,request.body.isFirstYear,request.body.isLastYear,request.body.notes,request.body.year_id];
+
+    console.log(values);
+    connection.query(sql,values,function(error,result){
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+}
+
+module.exports = {postYear,postPlayerYear,putYear};

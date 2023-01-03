@@ -25,13 +25,41 @@ function postChar(request,response){
     })
 
 }
+function postCharacters(request,response){
+    console.log("ENTRANDO EN NARNIA ABROCHENSE LOS CINTURONES FIUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUM");
+    console.log(JSON.stringify(request.body));
+
+    let sql = "INSERT INTO railway.character (character_id,house_id,year_id,char_name,age,char_status,isMarried,marriageGlory,courtesyMod,role,sex) VALUES ?;";
+    let values = [];
+
+    for (let i = 0; i < request.body.length; i++){
+        console.log("##################################################################################################################################################");
+        values.push([null,request.body[i].house_id,request.body[i].year_id,request.body[i].char_name,request.body[i].age,request.body[i].char_status,request.body[i].isMarried,null,null,request.body[i].role,request.body[i].sex]);
+
+        console.log("VALUE DE " + i + ": " + values[i]);
+        console.log("##################################################################################################################################################");
+    }
+
+    console.log(values);
+    
+    connection.query(sql,[values],function(error,result){
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+
+}
 
 //GET - muestra todos los personajes
 
 function getChar(request,response){
+    console.log("EL ERROR ESTA A PARTIR DE AQUI?????????????????????????????????????????????????????????????????????????");
 
-    console.log(request.body);
-
+    console.log("AQUI YA HEMOS VISTO QUE HA PASADO EL REQ.BODY");
     let house_id = request.query.house_id;
 
     let sql = "SELECT * FROM railway.character WHERE house_id = '" + house_id + "'";
@@ -142,7 +170,7 @@ function deleteChar(request,response){
 
 
 
-module.exports = {postChar,getChar,deleteChar,putChar}    
+module.exports = {postChar,postCharacters,getChar,deleteChar,putChar}    
 
 
 // INSERT INTO `railway`.`character` (`house_id`, `char_name`, `age`, `char_status`, `isMarried`, `marriageGlory`, `courtesyMod`, `role`) VALUES ('74', 'Personaje de prueba', '18', b'1', b'0', '0', '0', 'Escudero');

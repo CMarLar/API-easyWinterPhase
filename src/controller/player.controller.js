@@ -128,12 +128,9 @@ function putPlayersHouse(request,response){
 
 function putPlayers(request,response){
 
-    console.log("CAMBIO JUGADOR" + request.body);
+    console.log("CAMBIO JUGADOR" + JSON.stringify(request.body));
     console.log("HOLA: " + request.body.house_id);
 
-    if (request.body.house_id == "" || request.body.house_id == null){
-        request.body.house_id = null;
-    }
     if (request.body.house_id == "" || request.body.house_id == null){
         request.body.house_id = null;
     }
@@ -146,9 +143,9 @@ function putPlayers(request,response){
     if (request.body.winterPhaseDone == "" || request.body.winterPhaseDone == null){
         request.body.winterPhaseDone = null;
     }
-    let sql = "UPDATE players SET house_id = COALESCE(?,house_id), campaign_id = COALESCE(?,campaign_id), player_name = COALESCE(?,player_name), winterPhaseDone = COALESCE(',winterPhaseDone) WHERE player_id = ?;"
+    let sql = "UPDATE players SET house_id = COALESCE(?,house_id), campaign_id = COALESCE(?,campaign_id), player_name = COALESCE(?,player_name), winterPhaseDone = COALESCE(?,winterPhaseDone) WHERE player_id = ?;"
 
-    let values = [request.body.player_id,request.body.house_id,request.body.campaign_id,request.body.player_name,request.body.winterPhaseDone]
+    let values = [request.body.house_id,request.body.campaign_id,request.body.player_name,request.body.winterPhaseDone,request.body.player_id]
 
     connection.query(sql,values, function(error,result){
         if(error){
@@ -163,33 +160,5 @@ function putPlayers(request,response){
 }
 
 
-
-/*
-function insertTablaTeachers(){
-    let sql = "INSERT INTO teachers(first_name, last_name) VALUES ?;"
-    let values = [
-        ["Miguel","Generoso Valero"],
-        ["Adrian","Generoso Valero"],
-        ["Diego","Generoso Diaz"],
-        ["Mercedes","Valero Jimenez"],
-        ["Pedro","Languila Sorra"],
-        ["Ana","Perez Martin"],
-        ["Luis","Garcia Vaquero"],
-        ["Miguel","De Cervantes"],
-        ["Miguel","Hernandez"],
-        ["Maria","Magdalena Laputa"]
-    ]
-    connection.query(sql,[values], function(err,result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log("Datos introducidos con exito");
-            console.log(result);
-        }
-    })
-}
-*/
-
-
-module.exports = {postPlayer, getPlayers,putPlayersHouse}
+module.exports = {postPlayer, getPlayers,putPlayersHouse,putPlayers}
 
