@@ -7,7 +7,9 @@ router.post('/createhouse',charCtrl.postChar);//nuevo personaje principal y escu
 router.post('/currentcampaignCharacter', charCtrl.postCharacters);
 router.get("/addnpc",charCtrl.getChar);//recoge personajes de una casa
 router.delete("/addnpc",charCtrl.deleteChar);//borra borra un personaje
+router.delete("/housemanagementDeleteHouse",charCtrl.deleteCharByHouse);//borra los personajes de una casa
 router.put("/addnpc",charCtrl.putChar);//modifica un personaje
+
 
 
 
