@@ -148,6 +148,65 @@ function putChar(request,response){//al hacer las pruebas en Postman tenía que 
 
     
 }
+
+//MODIFIFCA VARIOS PERSONAJES A LA VEZ
+function putCharacters(request,response){
+
+    console.log(JSON.stringify(request.body));
+
+    let sql = "UPDATE railway.character SET house_id = COALESCE(?,house_id),year_id = COALESCE(?,year_id), char_name = COALESCE(?,char_name),age = COALESCE(?,age),char_status = COALESCE(?,char_status),isMarried = COALESCE(?,isMarried),marriageGlory = COALESCE(?,marriageGlory),courtesyMod = COALESCE(?,courtesyMod),role = COALESCE(?,role),sex = COALESCE(?,sex) WHERE character_id = ?";
+    let params = [];
+
+    for (let i = 0; i < request.body.characters.length; i++){
+
+        if(request.body.characters[i].house_id == "" || request.body.characters[i].house_id == null){
+            request.body.characters[i].house_id = null;
+        }
+        if(request.body.characters[i].year_id == "" || request.body.characters[i].year_id == null){
+            request.body.characters[i].year_id = null;
+        }
+        if(request.body.characters[i].char_name == "" || request.body.characters[i].char_name == null){
+            request.body.characters[i].char_name = null;
+        }
+        if(request.body.characters[i].age == "" || request.body.characters[i].age == null){
+            request.body.characters[i].age = null;
+        }
+        if(request.body.characters[i].char_status == "" || request.body.characters[i].char_status == null){
+            request.body.characters[i].char_status = null;
+        }
+        if(request.body.characters[i].isMarried == "" || request.body.characters[i].isMarried == null){
+            request.body.characters[i].isMarried = null;
+        }
+        if(request.body.characters[i].mariageGlory == "" || request.body.characters[i].mariageGlory == null){
+            request.body.characters[i].mariageGlory = null;
+        }
+        if(request.body.characters[i].courtesyMod == "" || request.body.characters[i].courtesyMod == null){
+            request.body.characters[i].courtesyMod = null;
+        }
+        if(request.body.characters[i].sex == "" || request.body.characters[i].sex == null){
+            request.body.characters[i].sex = null;
+        }
+        if(request.body.characters[i].character_id == "" || request.body.characters[i].character_id == null){
+            request.body.characters[i].character_id = null;
+        }
+
+
+
+        params.push([request.body.characters[i].house_id,request.body.characters[i].year_id,request.body.characters[i].char_name,request.body.characters[i].age,request.body.characters[i].char_status,request.body.characters[i].isMarried,request.body.characters[i].mariageGlory,request.body.characters[i].courtesyMod,request.body.characters[i].sex,request.body.characters[i].character_id]);
+    }
+
+    connection.query(sql,[params], function(error,result){
+        if(error){
+            console.log(error);
+            response.send(error);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+
+}
+
 //DELETE - BORRA UN PERSONAJE
 function deleteChar(request,response){
 
