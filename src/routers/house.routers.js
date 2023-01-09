@@ -9,4 +9,5 @@ router.put("/addpnc",houseCtrl.putHouse)//modificar personaje jugador en addnpc
 router.put("/phase4",houseCtrl.putHouse)//modificar nivel de manutención en phase4
 
 
+
 module.exports = router;
