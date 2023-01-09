@@ -8,7 +8,8 @@ router.get("/phases",playerCtrl.getPlayers);//mostrar nombre en las phases de in
 
 router.put('/housesmanagement', playerCtrl.putPlayersHouse);
 router.put('/currentcampaignPlayer', playerCtrl.putPlayers);
-router.put('/phase9', playerCtrl.putPlayers);//cambiar winterphasedone en phase9
+router.put('/phase9', playerCtrl.putPlayers);//cambiar winterPhaseDone del currentPlayer en phase9
+router.put('/winterphasemain', playerCtrl.putPlayers);//poner a cero todos los winterPhaseDone de los jugadores
 
 
 module.exports = router;
