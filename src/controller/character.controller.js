@@ -1,6 +1,8 @@
 const connection = require("../database")
 const {Character} = require("../models/character.model");
 
+//////////HOLA HOLA HOLA
+
 //POST -> /Crea un personaje
 function postChar(request,response){
 
