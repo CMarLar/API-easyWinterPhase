@@ -143,6 +143,11 @@ function putPlayers(request,response){
     if (request.body.winterPhaseDone == "" || request.body.winterPhaseDone == null){
         request.body.winterPhaseDone = null;
     }
+
+    if (request.body.winterPhaseDone == null){
+        request.body.winterPhaseDone = 0;
+    }
+    
     let sql = "UPDATE players SET house_id = COALESCE(?,house_id), campaign_id = COALESCE(?,campaign_id), player_name = COALESCE(?,player_name), winterPhaseDone = COALESCE(?,winterPhaseDone) WHERE player_id = ?;"
 
     let values = [request.body.house_id,request.body.campaign_id,request.body.player_name,request.body.winterPhaseDone,request.body.player_id]
