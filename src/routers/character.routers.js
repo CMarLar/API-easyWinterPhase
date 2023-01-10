@@ -10,7 +10,7 @@ router.delete("/addnpc",charCtrl.deleteChar);//borra borra un personaje
 router.delete("/housemanagementDeleteHouse",charCtrl.deleteCharByHouse);//borra los personajes de una casa
 router.put("/addnpc",charCtrl.putChar);//modifica un personaje
 router.get("/phase8",charCtrl.getOneChar)//para coger al personaje principal para mostrar su gloria por matrimonio.
-router.put("/phase9",charCtrl.putChar);//resetea la gloria por matrimonio.
+// router.put("/phase9",charCtrl.putChar);//resetea la gloria por matrimonio.
 
 
 

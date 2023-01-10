@@ -127,13 +127,18 @@ function putChar(request,response){//al hacer las pruebas en Postman tenía que 
         request.body.isMarried = null;
     }
     
-    if(request.body.isMarried == null){//esta guarrería es cosa de Miguel para que el p**o sql deje de pasar ceros a null
+    if(request.body.isMarried == null){//para que el sql deje de pasar ceros a null
         request.body.isMarried = 0;
     }
 
     if(request.body.mariageGlory == ""){
         request.body.mariageGlory = null;
     }
+
+    if(request.body.mariageGlory == null){//para que el sql deje de pasar ceros a null
+        request.body.mariageGlory = 0;
+    }
+
     if(request.body.courtesyMod == ""){
         request.body.courtesyMod = null;
     }
