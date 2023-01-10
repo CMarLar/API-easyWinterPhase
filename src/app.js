@@ -9,7 +9,9 @@ const campaignRouters = require("./routers/campaign.routers")
 const playerRouters = require("./routers/player.routers")
 const houseRouters = require("./routers/house.routers");
 const charRouters = require("./routers/character.routers");
-const yearRouters = require("./routers/year.routers")
+const yearRouters = require("./routers/year.routers");
+const adicionalRouters = require("./routers/adicional.routers")
+
 
 
 const app = express();
@@ -25,6 +27,7 @@ app.use(textRouters);
 app.use(houseRouters);
 app.use(charRouters);
 app.use(yearRouters);
+app.use(adicionalRouters);
 
 app.use(function (req,res,next){
     res.status(404).json({error : true, code : 404, message : "Endpoint doesnt found"});

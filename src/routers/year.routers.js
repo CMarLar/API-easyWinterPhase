@@ -3,7 +3,7 @@ const router = Router();
 const yearCtrl = require("../controller/year.controller");
 
 
-
+router.get('/campaignsYears', yearCtrl.getYear)
 router.post('/housesmanagementYear', yearCtrl.postYear);
 router.post('/housesmanagementPlayerYear', yearCtrl.postPlayerYear);
 

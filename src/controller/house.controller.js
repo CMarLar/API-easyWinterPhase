@@ -27,6 +27,24 @@ function postHouse(request,response){
 
 }
 
+function getHouse(request,response){
+
+    let sql = "SELECT * FROM house WHERE house_id = ?"
+    let params = [request.query.house_id];
+    console.log(request.query);
+
+    connection.query(sql,params,function(error,result){
+
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+}
+
 
 //Put -> /createhouse
 function putHouse(request,response){
@@ -94,4 +112,4 @@ function deleteHouse(request,response){
 
 
 
-module.exports = {postHouse,putHouse,deleteHouse}    
+module.exports = {postHouse,putHouse,deleteHouse,getHouse}    
