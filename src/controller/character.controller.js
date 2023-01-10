@@ -78,7 +78,29 @@ function getChar(request,response){
     })
 
 }
+/* irene */
+//GET - muestra todos los personajes mayores de 15
 
+function getChar_names(request,response){
+ 
+    let house_id = request.query.house_id;
+
+    let sql = "SELECT char_name FROM railway.character WHERE age > 15 AND char_status=1 AND house_id = '" + house_id + "'";
+
+    connection.query(sql, (error,result) =>{
+        if(error){console.log(error);}
+        else
+        {
+            console.log(result);
+
+            if(result)
+            response.send(result);
+
+            else{response.send("-1")}
+        }
+    })
+
+}
 
 function putChar(request,response){//al hacer las pruebas en Postman tenía que poner el 1 y el 0 de char_status entre comillas
 
@@ -247,7 +269,7 @@ function deleteChar(request,response){
         }
 
 
-module.exports = {postChar,postCharacters,getChar,deleteChar,putChar,deleteCharByHouse}    
+module.exports = {postChar,postCharacters,getChar,deleteChar,putChar,deleteCharByHouse,getChar_names}    
 
 
 // INSERT INTO `railway`.`character` (`house_id`, `char_name`, `age`, `char_status`, `isMarried`, `marriageGlory`, `courtesyMod`, `role`) VALUES ('74', 'Personaje de prueba', '18', b'1', b'0', '0', '0', 'Escudero');

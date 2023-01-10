@@ -6,11 +6,12 @@ router.post('/addnpc',charCtrl.postChar);//nuevo personaje
 router.post('/createhouse',charCtrl.postChar);//nuevo personaje principal y escudero
 router.post('/currentcampaignCharacter', charCtrl.postCharacters);
 router.get("/addnpc",charCtrl.getChar);//recoge personajes de una casa
+
+router.get("/phase7",charCtrl.getChar_names);//recoge nombres de personajes mayores de 15 años de una casa
+
 router.delete("/addnpc",charCtrl.deleteChar);//borra borra un personaje
 router.delete("/housemanagementDeleteHouse",charCtrl.deleteCharByHouse);//borra los personajes de una casa
 router.put("/addnpc",charCtrl.putChar);//modifica un personaje
-
-
 
 
 module.exports = router;
