@@ -79,6 +79,25 @@ function getChar(request,response){
 
 }
 
+function getOneChar(request,response){
+
+    let character_id = request.query.character_id;
+
+    let sql = "SELECT * FROM railway.character WHERE character_id = '" + character_id + "'";
+
+    connection.query(sql, (error,result) =>{
+        if(error){console.log(error);}
+        else
+        {
+            console.log(result);
+
+            if(result)
+            response.send(result);
+
+            else{response.send("-1")}
+        }
+    })
+}
 
 function putChar(request,response){//al hacer las pruebas en Postman tenía que poner el 1 y el 0 de char_status entre comillas
 
@@ -247,7 +266,7 @@ function deleteChar(request,response){
         }
 
 
-module.exports = {postChar,postCharacters,getChar,deleteChar,putChar,deleteCharByHouse}    
+module.exports = {postChar,postCharacters,getChar,deleteChar,putChar,deleteCharByHouse,getOneChar}    
 
 
 // INSERT INTO `railway`.`character` (`house_id`, `char_name`, `age`, `char_status`, `isMarried`, `marriageGlory`, `courtesyMod`, `role`) VALUES ('74', 'Personaje de prueba', '18', b'1', b'0', '0', '0', 'Escudero');
