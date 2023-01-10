@@ -105,6 +105,25 @@ function getPlayers(request, response) // funciona
     })
 }
 
+function getPlayersByCampaign(request, response) // funciona 
+{
+   let sql;
+    if (request.query.campaign_id == null)
+        sql = "SELECT * FROM players";
+   else
+        sql = "SELECT * FROM players WHERE campaign_id="  + request.query.campaign_id ;
+
+    connection.query(sql, function (err, result) 
+   {
+       if (err) 
+          console.log(err);
+        else 
+      {
+           response.send(result);
+       }
+    })
+}
+
 function putPlayersHouse(request,response){
 
     console.log("CAMBIO JUGADOR" + request.body);
@@ -160,5 +179,5 @@ function putPlayers(request,response){
 }
 
 
-module.exports = {postPlayer, getPlayers,putPlayersHouse,putPlayers}
+module.exports = {postPlayer, getPlayers,putPlayersHouse,putPlayers,getPlayersByCampaign}
 

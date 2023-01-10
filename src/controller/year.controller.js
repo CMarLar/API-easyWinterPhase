@@ -20,6 +20,24 @@ function postYear(request,response){
     })
 }
 
+function getYear(request,response){
+
+    let sql = "SELECT * FROM year WHERE campaign_id = " + request.query.campaign_id
+    let params = [request.query.campaign_id];
+    console.log(request.query);
+
+    connection.query(sql,function(error,result){
+
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+}
+
 function postPlayerYear(request,response){
 
     console.log("QUIERO VER ESTE BODY: " + JSON.stringify(request.body));
@@ -142,4 +160,4 @@ function putYear(request,response){
     })
 }
 
-module.exports = {postYear,postPlayerYear,putYear};
+module.exports = {postYear,postPlayerYear,putYear,getYear};

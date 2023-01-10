@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const houseCtrl = require("../controller/house.controller");
 
+router.get('/housesmanagement',houseCtrl.getHouse);
 router.post('/housesmanagement',houseCtrl.postHouse);//crear casa
 router.put("/createhouse",houseCtrl.putHouse);//modificar casa
 router.delete("/housesmanagement",houseCtrl.deleteHouse);//eliminar casa
