@@ -79,6 +79,52 @@ function getChar(request,response){
 
 }
 
+//GET - muestra todos los personajes
+
+function getChar(request,response){
+    console.log("EL ERROR ESTA A PARTIR DE AQUI?????????????????????????????????????????????????????????????????????????");
+
+    console.log("AQUI YA HEMOS VISTO QUE HA PASADO EL REQ.BODY");
+    let house_id = request.query.house_id;
+
+    let sql = "SELECT * FROM railway.character WHERE house_id = '" + house_id + "'";
+
+    connection.query(sql, (error,result) =>{
+        if(error){console.log(error);}
+        else
+        {
+            console.log(result);
+
+            if(result)
+            response.send(result);
+
+            else{response.send("-1")}
+        }
+    })
+
+}
+
+//GET - muestra todos los personajes
+
+function getCharByYear(request,response){
+
+    let house_id = request.query.house_id;
+    let year_id = request.query.year_id;
+
+    let sql = "SELECT * FROM railway.character WHERE house_id = " + house_id + " AND year_id = " + year_id;
+
+    connection.query(sql, (error,result) =>{
+        if(error){
+            console.log(error);
+            response.send(result);
+        }else{
+            console.log(result);
+            response.send(result);
+        }
+    })
+
+}
+
 
 function putChar(request,response){//al hacer las pruebas en Postman tenía que poner el 1 y el 0 de char_status entre comillas
 
@@ -247,7 +293,7 @@ function deleteChar(request,response){
         }
 
 
-module.exports = {postChar,postCharacters,getChar,deleteChar,putChar,deleteCharByHouse}    
+module.exports = {postChar,postCharacters,getChar,deleteChar,putChar,deleteCharByHouse,getCharByYear}    
 
 
 // INSERT INTO `railway`.`character` (`house_id`, `char_name`, `age`, `char_status`, `isMarried`, `marriageGlory`, `courtesyMod`, `role`) VALUES ('74', 'Personaje de prueba', '18', b'1', b'0', '0', '0', 'Escudero');
