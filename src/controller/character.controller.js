@@ -87,8 +87,9 @@ function getChar(request,response){
 function getChar_names(request,response){
  
     let house_id = request.query.house_id;
+    let year_id = request.query.year_id
 
-    let sql = "SELECT char_name FROM railway.character WHERE age > 15 AND char_status=1 AND house_id = '" + house_id + "'";
+    let sql = "SELECT char_name FROM railway.character WHERE age > 15 AND char_status=1 AND house_id = '" + house_id + "'AND year_id= '" + year_id + "'";
 
     connection.query(sql, (error,result) =>{
         if(error){console.log(error);}
