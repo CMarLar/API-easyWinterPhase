@@ -60,7 +60,7 @@ function currentcampaignToWinterPhase(request,response){
     console.log(JSON.stringify(request.body));
 
     let sql = "INSERT INTO year (yearNumber,isFirstYear,isLastYear,notes,campaign_id) VALUES (?,?,?,?,?)";
-    let values = [request.body.year.yearNumber + 1,0,1,request.body.year.notes,request.body.year.campaign_id];
+    let values = [request.body.year.yearNumber + 1,0,1,"",request.body.year.campaign_id];
 
     connection.query(sql,values,function(error,result){
 
@@ -122,6 +122,7 @@ function currentcampaignToWinterPhase(request,response){
                     }
 
                     //AQUI TIENES QUE HACER UN SEND
+                    response.send(result);
 
 
 
@@ -130,7 +131,6 @@ function currentcampaignToWinterPhase(request,response){
                     
                 }
             })
-            
         }
     })
 
@@ -142,7 +142,7 @@ function currentcampaignToWinterPhase(request,response){
         request.body.isFirstYear = 0;
     }
     
-    let values2 = [null,null,0,null,request.body.year.yearNumber,request.body.year.campaign_id];
+    let values2 = [null,null,0,request.body.notes,request.body.year.yearNumber,request.body.year.campaign_id];
 
     console.log(values2);
     connection.query(sql2,values2,function(error2,result2){
