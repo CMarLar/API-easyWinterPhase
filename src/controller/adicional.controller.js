@@ -113,4 +113,40 @@ function currentcampaignToWinterPhase(request,response){
 //CREARRRSEEEEEEEEEEE LA TABLA RELACION PLAYER YEARS
 }
 
-module.exports = {getDatosCampaign,getLastYear,getYearByNumber,currentcampaignToWinterPhase};
+function getHouseAndCharacters(request,response){
+
+    
+    // console.log(request.query);
+    let resultado = {"casa" : null, "personajes" : []}
+
+    let sql = "SELECT * FROM house WHERE house_id = ?"
+    let params = [request.query.house_id];
+
+    
+
+    connection.query(sql,params,function(error,result){
+        if(error){
+            console.log(error);
+            // response.send(result);
+        }else{
+            console.log(result);
+            resultado.casa = result;
+            let sql2 = "SELECT * FROM railway.character WHERE house_id = ? AND year_id = ?";
+            let params2 = [request.query.house_id,request.query.year_id];
+            
+            connection.query(sql2,params2,function(error2,result2){
+                if(error){
+                    console.log(error2);
+                    // response.send(result);
+                }else{
+                    resultado.personajes=result2;
+                    console.log(result2);
+                    response.send(resultado);
+                }
+            })
+        }
+    })
+    
+}
+
+module.exports = {getDatosCampaign,getLastYear,getYearByNumber,currentcampaignToWinterPhase,getHouseAndCharacters};
