@@ -71,7 +71,7 @@ function currentcampaignToWinterPhase(request,response){
             console.log(result);
             console.log("ESTE ES EL BIBIRI BABBIRI");
             // response.send(result);
-            let sql3 = "INSERT INTO railway.character(house_id,year_id,char_name,age,char_status,isMarried,marriageGlory,courtesyMod,railway.character.role,sex) SELECT house_id,?,char_name,age,char_status,isMarried,marriageGlory,courtesyMod,railway.character.role,sex FROM railway.character WHERE year_id = ?;"
+            let sql3 = "INSERT INTO railway.character(house_id,year_id,char_name,age,char_status,isMarried,marriageGlory,courtesyMod,railway.character.role,sex) SELECT house_id,?,char_name,age + 1,char_status,isMarried,marriageGlory,courtesyMod,railway.character.role,sex FROM railway.character WHERE year_id = ?;"
             let values3 = [result.insertId,request.body.year.year_id];
             console.log("HOLA HOLITA VECINITO: " + values3);
 
