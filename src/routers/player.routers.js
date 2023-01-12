@@ -10,7 +10,7 @@ router.get("/campaignsPlayers",playerCtrl.getPlayersByCampaign);
 router.put('/housesmanagement', playerCtrl.putPlayersHouse);
 router.put('/currentcampaignPlayer', playerCtrl.putPlayers);
 router.put('/phase9', playerCtrl.putPlayers);//cambiar winterPhaseDone del currentPlayer en phase9
-router.put('/winterphasemain', playerCtrl.putPlayers);//poner a cero todos los winterPhaseDone de los jugadores
+router.put('/winterphasemain', playerCtrl.putAllPlayers);//poner a cero todos los winterPhaseDone de los jugadores
 
 
 module.exports = router;

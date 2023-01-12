@@ -183,6 +183,58 @@ function putPlayers(request,response){
 
 }
 
+function putAllPlayers(request,response){
 
-module.exports = {postPlayer, getPlayers,putPlayersHouse,putPlayers,getPlayersByCampaign}
+    console.log("JUGADORES" + JSON.stringify(request.body));//almacena un array, por lo que hay que adaptar el resto en un bucle. ponemos el sql antes
+
+    let sql = "UPDATE players SET house_id = COALESCE(?,house_id), campaign_id = COALESCE(?,campaign_id), player_name = COALESCE(?,player_name), winterPhaseDone = COALESCE(?,winterPhaseDone) WHERE player_id = ?;"
+
+    let values;
+
+    let resultado = [];
+
+    for (let i = 0; i < request.body.length; i++) {
+
+        if (request.body[i].house_id == "" || request.body[i].house_id == null){
+            request.body[i].house_id = null;
+        }
+        if (request.body[i].campaign_id == "" || request.body[i].campaign_id == null){
+            request.body[i].campaign_id = null;
+        }
+        if (request.body[i].player_name == "" || request.body[i].player_name == null){
+            request.body[i].player_name = null;
+        }
+        if (request.body[i].winterPhaseDone == "" || request.body[i].winterPhaseDone == null){
+            request.body[i].winterPhaseDone = null;
+        }
+    
+        if (request.body[i].winterPhaseDone == null){
+            request.body[i].winterPhaseDone = 0;
+        }
+
+        values = [request.body[i].house_id,request.body[i].campaign_id,request.body[i].player_name,request.body[i].winterPhaseDone,request.body[i].player_id]
+        
+
+        connection.query(sql,values, function(error,result){
+            if(error){
+                console.log("Error: " + JSON.stringify(error));
+                response.send(error);
+            }else{
+                resultado.push(result);//se hace para hacer un contador de result.
+                console.log(JSON.stringify(resultado));
+            }
+        })
+    }
+
+    response.send(resultado)//hacemos el send.
+
+
+
+
+
+
+}
+
+
+module.exports = {postPlayer, getPlayers,putPlayersHouse,putPlayers,getPlayersByCampaign,putAllPlayers}
 
