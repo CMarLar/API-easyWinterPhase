@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
 
     user: process.env.DB_USER           ||  "root",
 
-    password: process.env.DB_PASSWORD   ||  "c1aru3zKmKjrvLlIXvwD",
+    password: process.env.DB_PASSWORD   ||  "IjJsK1dXyMVFItfCR0r5",
 
     database: process.env.DB_NAME       ||  "railway",
 
