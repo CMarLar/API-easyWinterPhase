@@ -6,21 +6,21 @@ const {User} = require("../models/user.model");
 
 function postRegister(request,response){
 
-    console.log(request.body);
-    console.log();
+    // console.log(request.body);
+    // console.log();
 
     let newUsuario = new User(request.body.password,request.body.email,request.body.avatar,request.body.username);
     let sql = "INSERT INTO user (password,email,avatar,username) VALUES (?,?,?,?)";
-    console.log("DATOS: " + JSON.stringify(newUsuario));
+    // console.log("DATOS: " + JSON.stringify(newUsuario));
     let params = [newUsuario.password,newUsuario.email,newUsuario.avatar,newUsuario.username];
     
 
     connection.query(sql,params, function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -31,17 +31,17 @@ function postRegister(request,response){
 
 function postLogin(request,response){
 
-    console.log(request.body);
+    // console.log(request.body);
     let sql = "SELECT user_id,password,email,avatar,username FROM user WHERE email = ? AND password = ?";
     let params = [request.body.email,request.body.password];
-    console.log("PARAMS: " + params);
+    // console.log("PARAMS: " + params);
 
     connection.query(sql,params, function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(error);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -51,7 +51,7 @@ function postLogin(request,response){
 
 function putUser(request,response){
 
-    console.log(request.body);
+    // console.log(request.body);
 
     if(request.body.password == ""){
         request.body.password = null;
@@ -73,17 +73,17 @@ function putUser(request,response){
 
         connection.query(sql,params, function(error,result){
             if(error){
-                console.log(error);
+                // console.log(error);
                 response.send(error);
             }else{
-                console.log(result);
+                // console.log(result);
                 response.send(result);
             }
         })
 
     }else{
 
-        console.log("NO SE HA INTRODUCIDO NINGUN ID DE USUARIO");
+        // console.log("NO SE HA INTRODUCIDO NINGUN ID DE USUARIO");
     }
 
     

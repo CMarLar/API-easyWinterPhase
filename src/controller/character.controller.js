@@ -6,7 +6,7 @@ const {Character} = require("../models/character.model");
 //POST -> /Crea un personaje
 function postChar(request,response){
 
-    console.log(request.body);
+    // console.log(request.body);
 
     let newChar = new Character (request.body.house_id,request.body.year_id,request.body.char_name,request.body.age,request.body.char_status,request.body.isMarried,0,0,request.body.role,request.body.sex,null);
 
@@ -14,7 +14,7 @@ function postChar(request,response){
 
     let sql = "INSERT INTO railway.character (character_id,house_id,year_id,char_name,age,char_status,isMarried,role,sex)" + "VALUES (?,?,?,?,?,?,?,?,?);";
 
-    console.log("DATOS: " + JSON.stringify(newChar));
+    // console.log("DATOS: " + JSON.stringify(newChar));
 
     connection.query(sql,params, function(error,result){
         if(error){
@@ -28,28 +28,27 @@ function postChar(request,response){
 
 }
 function postCharacters(request,response){
-    console.log("ENTRANDO EN NARNIA ABROCHENSE LOS CINTURONES FIUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUM");
-    console.log(JSON.stringify(request.body));
+    // console.log(JSON.stringify(request.body));
 
     let sql = "INSERT INTO railway.character (character_id,house_id,year_id,char_name,age,char_status,isMarried,marriageGlory,courtesyMod,role,sex) VALUES ?;";
     let values = [];
 
     for (let i = 0; i < request.body.length; i++){
-        console.log("##################################################################################################################################################");
+        // console.log("##################################################################################################################################################");
         values.push([null,request.body[i].house_id,request.body[i].year_id,request.body[i].char_name,request.body[i].age,request.body[i].char_status,request.body[i].isMarried,null,null,request.body[i].role,request.body[i].sex]);
 
-        console.log("VALUE DE " + i + ": " + values[i]);
-        console.log("##################################################################################################################################################");
+        // console.log("VALUE DE " + i + ": " + values[i]);
+        // console.log("##################################################################################################################################################");
     }
 
-    console.log(values);
+    // console.log(values);
     
     connection.query(sql,[values],function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -59,9 +58,7 @@ function postCharacters(request,response){
 //GET - muestra todos los personajes
 
 function getChar(request,response){
-    console.log("EL ERROR ESTA A PARTIR DE AQUI?????????????????????????????????????????????????????????????????????????");
 
-    console.log("AQUI YA HEMOS VISTO QUE HA PASADO EL REQ.BODY");
     let house_id = request.query.house_id;
 
     let sql = "SELECT * FROM railway.character WHERE house_id = '" + house_id + "'";
@@ -70,7 +67,7 @@ function getChar(request,response){
         if(error){console.log(error);}
         else
         {
-            console.log(result);
+            // console.log(result);
 
             if(result)
             response.send(result);
@@ -92,10 +89,10 @@ function getCharByYear(request,response){
 
     connection.query(sql, (error,result) =>{
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -105,9 +102,7 @@ function getCharByYear(request,response){
 //GET - muestra todos los personajes
 
 function getChar(request,response){
-    console.log("EL ERROR ESTA A PARTIR DE AQUI?????????????????????????????????????????????????????????????????????????");
 
-    console.log("AQUI YA HEMOS VISTO QUE HA PASADO EL REQ.BODY");
     let house_id = request.query.house_id;
 
     let sql = "SELECT * FROM railway.character WHERE house_id = '" + house_id + "'";
@@ -116,7 +111,7 @@ function getChar(request,response){
         if(error){console.log(error);}
         else
         {
-            console.log(result);
+            // console.log(result);
 
             if(result)
             response.send(result);
@@ -141,7 +136,7 @@ function getChar_names(request,response){
         if(error){console.log(error);}
         else
         {
-            console.log(result);
+            // console.log(result);
 
             if(result)
             response.send(result);
@@ -162,7 +157,7 @@ function getOneChar(request,response){
         if(error){console.log(error);}
         else
         {
-            console.log(result);
+            // console.log(result);
 
             if(result)
             response.send(result);
@@ -174,7 +169,7 @@ function getOneChar(request,response){
 
 function putChar(request,response){//al hacer las pruebas en Postman tenía que poner el 1 y el 0 de char_status entre comillas
 
-    console.log(request.body);
+    // console.log(request.body);
 
     if(request.body.house_id == ""){
         request.body.house_id = null;
@@ -230,17 +225,17 @@ function putChar(request,response){//al hacer las pruebas en Postman tenía que 
 
         connection.query(sql,params, function(error,result){
             if(error){
-                console.log(error);
+                // console.log(error);
                 response.send(error);
             }else{
-                console.log(result);
+                // console.log(result);
                 response.send(result);
             }
         })
 
     }else{
 
-        console.log("No se reconoce el id de personaje");
+        // console.log("No se reconoce el id de personaje");
     }
 
     
@@ -251,16 +246,16 @@ function deleteChar(request,response){
 
     let character_id = request.body.character_id;
     
-        console.log(request.body);//
+        // console.log(request.body);//
         let sql = "DELETE FROM railway.character WHERE character_id = '" + character_id + "'";
-        console.log(sql); 
+        // console.log(sql); 
         connection.query(sql, (err, result) =>
         {
             if (err) 
                 console.log(err);
             else 
             {
-                console.log(result);
+                // console.log(result);
                 response.send(result);
             }
         })
@@ -270,16 +265,16 @@ function deleteChar(request,response){
 
         let house_id = request.body.house_id;
         
-            console.log(request.body);//
+            // console.log(request.body);//
             let sql = "DELETE FROM railway.character WHERE house_id = '" + house_id + "'";
-            console.log(sql); 
+            // console.log(sql); 
             connection.query(sql, (err, result) =>
             {
                 if (err) 
                     console.log(err);
                 else 
                 {
-                    console.log(result);
+                    // console.log(result);
                     response.send(result);
                 }
             })
@@ -287,9 +282,7 @@ function deleteChar(request,response){
 
 
         function getCharsLastYear(request,response){
-            console.log("EL ERROR ESTA A PARTIR DE AQUI?????????????????????????????????????????????????????????????????????????");
         
-            console.log("AQUI YA HEMOS VISTO QUE HA PASADO EL REQ.BODY");
             let house_id = request.query.house_id;
             let year_id = request.query.year_id;
         
@@ -300,7 +293,7 @@ function deleteChar(request,response){
                 if(error){console.log(error);}
                 else
                 {
-                    console.log(result);
+                    // console.log(result);
         
                     if(result)
                     response.send(result);

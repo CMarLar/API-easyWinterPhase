@@ -4,9 +4,9 @@ const {Player} = require("../models/player.model");
 
 function postPlayer(request,response){
 
-    console.log("BODY COMPLETO " + JSON.stringify(request.body));
-    console.log("BODY[0] " +JSON.stringify(request.body[0]));
-    console.log("BODY[0] " +JSON.stringify(request.body[1]));
+    // console.log("BODY COMPLETO " + JSON.stringify(request.body));
+    // console.log("BODY[0] " +JSON.stringify(request.body[0]));
+    // console.log("BODY[0] " +JSON.stringify(request.body[1]));
 
     let sql = "INSERT INTO players (house_id,campaign_id,player_name,winterPhaseDone) VALUES ?;"//esto se hace para inserciones múltiples
     let values;
@@ -77,10 +77,10 @@ function postPlayer(request,response){
 
     connection.query(sql,[values], function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -126,8 +126,8 @@ function getPlayersByCampaign(request, response) // funciona
 
 function putPlayersHouse(request,response){
 
-    console.log("CAMBIO JUGADOR" + request.body);
-    console.log("HOLA: " + request.body.house_id);
+    // console.log("CAMBIO JUGADOR" + request.body);
+    // console.log("HOLA: " + request.body.house_id);
 
     let sql = "UPDATE players SET house_id = ? where player_id = ?;"//esto se hace para inserciones múltiples
 
@@ -135,10 +135,10 @@ function putPlayersHouse(request,response){
 
     connection.query(sql,values, function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -147,8 +147,8 @@ function putPlayersHouse(request,response){
 
 function putPlayers(request,response){
 
-    console.log("CAMBIO JUGADOR" + JSON.stringify(request.body));
-    console.log("HOLA: " + request.body.house_id);
+    // console.log("CAMBIO JUGADOR" + JSON.stringify(request.body));
+    // console.log("HOLA: " + request.body.house_id);
 
     if (request.body.house_id == "" || request.body.house_id == null){
         request.body.house_id = null;
@@ -173,10 +173,10 @@ function putPlayers(request,response){
 
     connection.query(sql,values, function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -185,7 +185,7 @@ function putPlayers(request,response){
 
 function putAllPlayers(request,response){
 
-    console.log("JUGADORES" + JSON.stringify(request.body));//almacena un array, por lo que hay que adaptar el resto en un bucle. ponemos el sql antes
+    // console.log("JUGADORES" + JSON.stringify(request.body));//almacena un array, por lo que hay que adaptar el resto en un bucle. ponemos el sql antes
 
     let sql = "UPDATE players SET house_id = COALESCE(?,house_id), campaign_id = COALESCE(?,campaign_id), player_name = COALESCE(?,player_name), winterPhaseDone = COALESCE(?,winterPhaseDone) WHERE player_id = ?;"
 
@@ -217,11 +217,11 @@ function putAllPlayers(request,response){
 
         connection.query(sql,values, function(error,result){
             if(error){
-                console.log("Error: " + JSON.stringify(error));
+                // console.log("Error: " + JSON.stringify(error));
                 response.send(error);
             }else{
                 resultado.push(result);//se hace para hacer un contador de result.
-                console.log(JSON.stringify(resultado));
+                // console.log(JSON.stringify(resultado));
             }
         })
     }

@@ -15,7 +15,7 @@ function getCampaigns (request,response){
         if(error){console.log(error);}
         else
         {
-            console.log(result);
+            // console.log(result);
 
             if(result)
             response.send(result);
@@ -30,17 +30,17 @@ function deleteCampaign(request,response){
 
 let campaign_Id = request.body.campaign_id;
 
-    console.log(request.body);//
+    // console.log(request.body);//
 
     let sql = "DELETE FROM railway.campaign WHERE campaign_id = '" + campaign_Id + "'";
-    console.log(sql); 
+    // console.log(sql); 
     connection.query(sql, (error, result) =>
     {
         if (error) 
             console.log(error);
         else 
         {
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -49,17 +49,17 @@ let campaign_Id = request.body.campaign_id;
 
 //POST -> /campaign crea campaña
 function postCampaign(request,response){
-    console.log(request.body);
+    // console.log(request.body);
     let sql = "INSERT INTO campaign (campaign_name,user_id)" +
                 "VALUES ('"+request.body.campaign_name +"', '"+
                             request.body.user_id + "')";
-    console.log(sql);
+    // console.log(sql);
 
     connection.query(sql, (error,result) =>{
         if(error){console.log(error);}
         else
         {
-            console.log(result);
+            // console.log(result);
 
             if(result)
             response.send(result);
@@ -72,7 +72,7 @@ function postCampaign(request,response){
 //PUT -> /campaign modifica campaña
 function putCampaign(request,response){
 
-    console.log(request.body);
+    // console.log(request.body);
 
     if(request.body.campaign_name == ""){
         request.body.campaign_name = null;
@@ -89,17 +89,17 @@ function putCampaign(request,response){
 
         connection.query(sql,params, function(error,result){
             if(error){
-                console.log(error);
+                // console.log(error);
                 response.send(error);
             }else{
-                console.log(result);
+                // console.log(result);
                 response.send(result);
             }
         })
 
     }else{
 
-        console.log("No se reconoce el id de campaña");
+        // console.log("No se reconoce el id de campaña");
     }
 
     

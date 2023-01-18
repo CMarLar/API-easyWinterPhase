@@ -4,7 +4,7 @@ const {House} = require("../models/house.model");
 //POST -> /createhouse
 function postHouse(request,response){
 
-    console.log(request.body);
+    // console.log(request.body);
 
     let newHouse = new House (request.body.house_name,null,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.economyLevels,null);
 
@@ -13,14 +13,14 @@ function postHouse(request,response){
 
     let params = [request.body.house_name,request.body.holding_name,request.body.familyCharacteristic,request.body.shield,request.body.economyLevels]
 
-    console.log("DATOS: " + JSON.stringify(newHouse));
+    // console.log("DATOS: " + JSON.stringify(newHouse));
 
     connection.query(sql,params, function(error,result){
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -31,15 +31,15 @@ function getHouse(request,response){
 
     let sql = "SELECT * FROM house WHERE house_id = ?"
     let params = [request.query.house_id];
-    console.log(request.query);
+    // console.log(request.query);
 
     connection.query(sql,params,function(error,result){
 
         if(error){
-            console.log(error);
+            // console.log(error);
             response.send(result);
         }else{
-            console.log(result);
+            // console.log(result);
             response.send(result);
         }
     })
@@ -49,7 +49,7 @@ function getHouse(request,response){
 //Put -> /createhouse
 function putHouse(request,response){
 
-    console.log(request.body);
+    // console.log(request.body);
 
     if(request.body.house_name == ""){
         request.body.house_name = null;
@@ -75,17 +75,17 @@ function putHouse(request,response){
 
         connection.query(sql,params, function(error,result){
             if(error){
-                console.log(error);
+                // console.log(error);
                 response.send(error);
             }else{
-                console.log(result);
+                // console.log(result);
                 response.send(result);
             }
         })
 
     }else{
 
-        console.log("No se reconoce el id de campaña");
+        // console.log("No se reconoce el id de campaña");
     }
 }
 
@@ -95,16 +95,16 @@ function deleteHouse(request,response){
     let house_id = request.body.house_id;
     
     
-        console.log(request.body);//
+        // console.log(request.body);//
         let sql = "DELETE FROM railway.house WHERE house_id = '" + house_id + "'";
-        console.log(sql); 
+        // console.log(sql); 
         connection.query(sql, (err, result) =>
         {
             if (err) 
                 console.log(err);
             else 
             {
-                console.log(result);
+                // console.log(result);
                 response.send(result);
             }
         })
