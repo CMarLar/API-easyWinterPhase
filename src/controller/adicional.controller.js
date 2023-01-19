@@ -136,7 +136,7 @@ function currentcampaignToWinterPhase(request,response){
         request.body.isFirstYear = 0;
     }
     
-    let values2 = [null,null,0,request.year.body.year.notes,request.body.year.yearNumber,request.body.year.campaign_id];
+    let values2 = [null,null,0,request.body.year.notes,request.body.year.yearNumber,request.body.year.campaign_id];
 
     // console.log(values2);
     connection.query(sql2,values2,function(error2,result2){
